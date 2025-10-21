@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSX MAP</title>
+
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<style>
+  .complete {
+    text-decoration: line-through;
+  }
+</style>
+
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const tasks  = [
+      {
+        id: 1,
+        title: "Quét nhà",
+        isCompleted: true,
+      },
+      {
+        id: 2,
+        title: "Nấu cơm",
+        isCompleted: true,
+      },
+      {
+        id: 3,
+        title: "Rửa bát",
+        isCompleted: true,
+      },
+      {
+        id: 4,
+        title: "Lau nhà",
+        isCompleted: false,
+      },
+      {
+        id: 5,
+        title: "Giặt quần áo",
+        isCompleted: false,
+      },
+    ]
+    
+    const root = ReactDOM.createRoot(document.querySelector("#root"));
+
+    root.render(
+      <ul>
+          {
+            tasks.map(task => (
+              <li
+                key={task.id}
+                className={task.isCompleted ? 'complete': ''}
+              >
+                {task.title}
+              </li>
+            ))
+          }
+      </ul>
+    )
+  </script>
+</body>
+
+</html>

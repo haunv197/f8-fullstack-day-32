@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSX/Babel</title>
+
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    button,
+    a {
+      background-color: #ddd;
+      border: none;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover,
+    a:hover {
+      opacity: 0.8;
+    }
+
+
+    .btn-primary {
+      background-color: rgb(5, 101, 5);
+      color: white;
+    }
+
+    button.btn-primary:hover {
+      background-color: rgb(14, 201, 14);
+    }
+
+    .btn-rounded {
+      border-radius: 20px;
+    }
+
+    .btn-bordered {
+      border: 2px solid;
+      background-color: transparent;
+    }
+
+    button.btn-bordered:hover {
+      background-color: rgb(110, 244, 110);
+    }
+
+    .size-s {
+      padding: 6px 12px;
+      font-size: 12px;
+    }
+
+    .size-m {
+      padding: 10px 16px;
+      font-size: 14px;
+    }
+
+    .size-l {
+      padding: 14px 24px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+
+    const Button = (props) => {
+      const {primary, rounded, bordered, href, size ="m", children} = props;
+      const Tag = href ? "a" : "button";
+
+      const classNames = [];
+      if(primary) classNames.push("btn-primary")
+      if(rounded) classNames.push("btn-rounded")
+      if(bordered) classNames.push("btn-bordered")
+      if(size === 's') classNames.push("size-s")
+      if(size === 'm') classNames.push("size-m")
+      if(size === 'l') classNames.push("size-l")
+
+      return (
+        <Tag { ...props} href className={classNames.join(" ") }>
+          {children}
+        </Tag>
+      )
+    }
+    
+    const root = ReactDOM.createRoot(document.querySelector("#root"))
+    root.render(
+     <>
+      <Button type="button">
+        Normal 
+      </Button>
+      
+      <Button primary type="submit" rounded bordered>
+        Primary
+      </Button>
+     
+      <Button rounded> 
+        Rounded
+      </Button>
+
+      <Button bordered>
+        Bordered
+      </Button>
+     
+      <Button href="https://google.com" target="_blank" primary> 
+          Link Google
+      </Button>
+     </>
+    )
+
+  </script>
+
+</body>
+
+</html>
